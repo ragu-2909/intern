@@ -45,6 +45,40 @@ router.get('/products', async function (req, res) {
         });
     }
 });
+
+router.get('/heroProducts', async function (req, res) {
+    try{
+        const products = await ProductModel.find();
+        const heroProducts = products.filter(product => product.inStock && product.discount.applied);
+ 
+        res.json({
+            success: true,
+            data: heroProducts.map(product => ({
+                _id: product._id,
+                name: product.name,
+                price: product.costPrice,
+                discount: product.discount,
+                image: product.image
+            }))
+        }); 
+
+            
+        
+    }catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'An error occurred while retrieving hero products',
+            error: error.message
+        });
+    }
+    // if (heroProducts.length === 0) {
+    //     return res.status(404).json({
+    //         success: false,
+    //         message: "No hero products found",
+    //     });
+    // }
+    
+})
 router.get('/product/:productId', async function (req, res) {
     try {
         const product = await ProductModel.findOne({

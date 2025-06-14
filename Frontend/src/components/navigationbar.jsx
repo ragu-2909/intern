@@ -1,7 +1,7 @@
 function Navbar() {
     return (
         <div>
-            <nav className="bg-white px-6 py-3 shadow-md">
+            <nav className="bg-transparent bg-white/60 px-6 py-3 shadow-md">
                 <div className="max-w-8xl mx-auto flex items-center justify-between">
 
                     {/* Logo */}
