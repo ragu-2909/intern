@@ -16,8 +16,8 @@ function App() {
 
         
         <Routes>
-          
-          <Route path="/home" element={<LandingPage />} />
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/home" element={<LandingPage/>} />
           <Route path="/login" element={<Loginpage/>}/>
           <Route path="/signup" element={<SignUp/>}/>
           <Route path="/product/:id" element={<Proddisc/>} />
