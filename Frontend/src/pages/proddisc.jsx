@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import userAuth from '../../../Backend/middlewares/userauth';
 
 function Proddisc() {
     const [product, setProduct] = useState(null);
@@ -42,6 +43,51 @@ function Proddisc() {
     const handleNext = () => {
         setImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
     };
+
+
+    const handleOrder = async () => {
+        const orderDetails = {
+            orderPlaced: true,
+            product: {
+                productId: product._id,
+                name: product.name,
+                variant: variant.variant,
+                subVariant: {
+                    feature: subVariant.feature,
+                    color: {
+                        name: color.name,
+                        qty: color.qty,
+                        Range: color.Range,
+                        Acceleration: color.Acceleration,
+                        "Top Speed": color["Top Speed"],
+                        image: color.image,
+                        cost: color.cost
+                    }
+                }
+            }
+        };
+
+        try {
+            const res = await axios.post('http://localhost:5000/user/confirmOrder', orderDetails, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': localStorage.getItem('token')
+                }
+            });
+
+            if (res.data.success) {
+                alert("Order placed successfully!");
+                console.log("Order placed successfully", res.data);
+            } else {
+                console.error("Order failed:", res.data.message);
+            }
+        } catch (error) {
+            console.error("Error placing order:", error.response?.data?.message || error.message);
+        }
+
+    };
+
+
 
     return (
         <>
@@ -129,7 +175,7 @@ function Proddisc() {
                         </div>
                     </div>
 
-                    
+
                     {/* Colors with specs */}
                     <div>
                         <h2 className="text-2xl font-semibold mb-4">Colors & Specs</h2>
@@ -146,7 +192,7 @@ function Proddisc() {
                                 >
                                     <div className="flex justify-between items-center">
                                         <h3 className="text-lg font-bold text-gray-700">{c.color}</h3>
-                                        
+
                                     </div>
                                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-3 text-sm text-gray-800">
                                         <div><strong>Range:</strong> {c.Range} km</div>
@@ -156,6 +202,11 @@ function Proddisc() {
                                     </div>
                                 </div>
                             ))}
+                        </div>
+                        <div>
+                            <button onClick={handleOrder} className='w-11/12 h-16 bg-black text-white font-semibold rounded-md mt-4 hover:bg-gray-800 transition duration-300'>
+                                Place Order
+                            </button>
                         </div>
                     </div>
 

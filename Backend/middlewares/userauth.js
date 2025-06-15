@@ -18,7 +18,7 @@ let userAuth= async (req, res, next) =>{
     }
 
     try {
-        const response = jwt.verify(token, jwtSecret);
+        const response = jwt.verify(token, "Tesla");
         
         req.userId = response.id;
         

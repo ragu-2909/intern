@@ -23,11 +23,19 @@ const User_Order_history = new Schema ({
     orderHistory : {type: [Object]}
 })
 
+const user_customize = new Schema({
+    userId: {type: ObjectId, required: true},
+    prodId: {type: ObjectId, required: true},
+    customization: {type: Object, required: true},
+    createdAt: { type: Date, default: Date.now },
+})
+
 
 const UserModel= mongoose.model('users',User);
 const UserInfoModel = mongoose.model('user-info',UserInfo)
+const UserCustomizeModel = mongoose.model('user-customize', user_customize);
 
 const UserOrderHistoryModel = mongoose.model('user-orders', User_Order_history)
 
-export { UserModel, UserInfoModel, UserOrderHistoryModel};
+export { UserModel, UserInfoModel, UserOrderHistoryModel, UserCustomizeModel };
  

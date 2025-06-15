@@ -8,6 +8,8 @@ import userlogin from './routes/user/userlogin.js';
 import userSignUp from './routes/user/userSignUp.js';
 import getproducts from './routes/getproducts.js'
 
+import userOp from './routes/user/userOp.js';
+
 
 
 dotenv.config();
@@ -29,6 +31,8 @@ app.get('/', function(req,res){
 app.use('/', getproducts)
 app.use('/user', userSignUp);
 app.use('/user', userlogin);
+app.use('/user' , userOp);
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

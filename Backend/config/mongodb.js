@@ -4,7 +4,7 @@ const connectDB = async () => {
     
 
         
-        await mongoose.connect("mongodb+srv://raghavendraashokkumbar:PBYglMDWgjzNWOk1@cluster0.tmnttqo.mongodb.net/");
+        await mongoose.connect("mongodb+srv://raghavendraashokkumbar:Ragu@cluster0.tmnttqo.mongodb.net/");
 
         mongoose.connection.on('connected', () => {
             console.log('Database connected successfully.');
