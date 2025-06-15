@@ -9,7 +9,7 @@ function OrderHistory() {
     useEffect(() => {
         const fetchOrderHistory = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/user/getOrderHistory", {
+                const response = await axios.get("https://intern-l810.onrender.com/user/getOrderHistory", {
                     headers: {
                         token: localStorage.getItem("token"),
                     },

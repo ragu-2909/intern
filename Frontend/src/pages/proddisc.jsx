@@ -21,7 +21,7 @@ function Proddisc() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/product/${params.id}`);
+                const response = await axios.get(`https://intern-l810.onrender.com/product/${params.id}`);
                 setProduct(response.data.data);
             } catch (error) {
                 console.error("Error fetching product:", error);
@@ -69,7 +69,7 @@ function Proddisc() {
         };
 
         try {
-            const res = await axios.post('http://localhost:5000/user/confirmOrder', orderDetails, {
+            const res = await axios.post('https://intern-l810.onrender.com/user/confirmOrder', orderDetails, {
                 headers: {
                     'Content-Type': 'application/json',
                     'token': localStorage.getItem('token')
@@ -111,7 +111,7 @@ function Proddisc() {
             }
         }
         try {
-            const response = await axios.post('http://localhost:5000/user/customize', CustomizeDetails, {
+            const response = await axios.post('https://intern-l810.onrender.com/user/customize', CustomizeDetails, {
                 headers: {
                     'Content-Type': 'application/json',
                     'token': localStorage.getItem('token')

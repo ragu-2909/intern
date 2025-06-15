@@ -11,7 +11,7 @@ function ProductShowcase() {
   useEffect(() => {
     const fetchHeroProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/heroProducts");
+        const response = await axios.get("https://intern-l810.onrender.com/heroProducts");
         setHeroProducts(response.data.data);
       } catch (error) {
         console.error("Error fetching hero products:", error);

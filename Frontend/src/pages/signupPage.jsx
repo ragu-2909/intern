@@ -18,7 +18,7 @@ function SignUp() {
         if (true) {
             try {
                 const response = await axios.post(
-                    'http://localhost:5000/user/signup',
+                    'https://intern-l810.onrender.com/user/signup',
                     { name, address, pincode, phoneNo, email, password }
                 );
 
