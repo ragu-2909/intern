@@ -77,6 +77,7 @@ function Proddisc() {
             });
 
             if (res.data.success) {
+                nav('/orderHistory');
                 alert("Order placed successfully!");
                 console.log("Order placed successfully", res.data);
             } else {
@@ -118,15 +119,22 @@ function Proddisc() {
                 }
             });
 
-            if (res.data.success) {
+            if (response.data.success) {
+                nav('/customizations');
                 alert("Customization saved successfully!");
-                console.log("Customization saved successfully", res.data);
-            } else {
-                console.error("Customization save failed:", res.data.message);
+                console.log("Customization saved successfully", response.data);
             }
         } catch (error) {
-            console.error("Error saving customization:", error.response?.data?.message || error.message);
+            if (error.response && error.response.status === 400) {
+                alert("Customization already exists");
+                nav('/customizations');
+                console.error("Customization save failed:", error.response.data.message);
+            } else {
+                console.error("Error saving customization:", error.response?.data?.message || error.message);
+                alert("Something went wrong. Please try again.");
+            }
         }
+
     }
 
 
@@ -136,7 +144,7 @@ function Proddisc() {
             <div className="flex justify-between items-center p-6 fixed w-full bg-white z-20">
                 <svg
                     className="w-32 text-black cursor-pointer"
-                    onClick={() => navigate('/')}
+                    onClick={() => nav('/home')}
 
                     viewBox="0 0 342 35"
                     xmlns="http://www.w3.org/2000/svg"
