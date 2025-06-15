@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 function Navbar() {
+    const navigate = useNavigate();
     return (
         <div>
             <nav className=" bg-white/60 px-6 py-3 shadow-md">
@@ -6,9 +9,17 @@ function Navbar() {
 
                     {/* Logo */}
                     <div className="flex-items-center overflow-visible">
-                        <svg className="w-32" viewBox="0 0 250 45" xmlns="http://www.w3.org/2000/svg">
-                            <path fill="currentColor" d="M0 .1a9.7 9.7 0 0 0 7 7h11l.5.1v27.6h6.8V7.3L26 7h11a9.8 9.8 0 0 0 7-7H0zm238.6 0h-6.8v34.8H263a9.7 9.7 0 0 0 6-6.8h-30.3V0zm-52.3 6.8c3.6-1 6.6-3.8 7.4-6.9l-38.1.1v20.6h31.1v7.2h-24.4a13.6 13.6 0 0 0-8.7 7h39.9v-21h-31.2v-7zm116.2 28h6.7v-14h24.6v14h6.7v-21h-38zM85.3 7h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7m0 13.8h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7m0 14.1h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7M308.5 7h26a9.6 9.6 0 0 0 7-7h-40a9.6 9.6 0 0 0 7 7"></path>
+                        <svg
+                            className="w-32 text-black" // or text-white depending on theme
+                            viewBox="0 0 342 35"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            role="img"
+                            aria-label="Tesla Wordmark Logo"
+                        >
+                            <path d="M0 .1a9.7 9.7 0 0 0 7 7h11l.5.1v27.6h6.8V7.3L26 7h11a9.8 9.8 0 0 0 7-7H0zm238.6 0h-6.8v34.8H263a9.7 9.7 0 0 0 6-6.8h-30.3V0zm-52.3 6.8c3.6-1 6.6-3.8 7.4-6.9l-38.1.1v20.6h31.1v7.2h-24.4a13.6 13.6 0 0 0-8.7 7h39.9v-21h-31.2v-7zm116.2 28h6.7v-14h24.6v14h6.7v-21h-38zM85.3 7h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7m0 13.8h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7m0 14.1h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7M308.5 7h26a9.6 9.6 0 0 0 7-7h-40a9.6 9.6 0 0 0 7 7" />
                         </svg>
+
                     </div>
 
 
@@ -28,12 +39,20 @@ function Navbar() {
                             </li>
 
 
-                            <li className="relative group inline-block">
+                            <li onClick={() => {
+                                const token = localStorage.getItem('token');
+                                if (!token) {
+                                    alert('Please login to view your customizations');
+                                    return;
+                                }
+
+                                navigate('/customizations')
+                            }} className="relative group inline-block">
                                 <a
                                     href="#"
                                     className="relative z-10 px-4 py-2 text-black"
                                 >
-                                    Energy
+                                    Your Customizations
                                 </a>
                                 <span
                                     className="absolute inset-0 z-0 rounded-md bg-gray-300 backdrop-blur-md ring-1 ring-white/40 shadow-md shadow-black/10 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-in-out"
@@ -41,12 +60,20 @@ function Navbar() {
                             </li>
 
 
-                            <li className="relative group inline-block">
+                            <li onClick={() => {
+                                const token = localStorage.getItem('token');
+                                if (!token) {
+                                    navigate('/login');
+                                    return;
+                                }
+
+                                navigate('/orderHistory')
+                            }} className="relative group inline-block">
                                 <a
                                     href="#"
                                     className="relative z-10 px-4 py-2 text-black"
                                 >
-                                    Charging
+                                    Orders
                                 </a>
                                 <span
                                     className="absolute inset-0 z-0 rounded-md bg-gray-300 backdrop-blur-md ring-1 ring-white/40 shadow-md shadow-black/10 opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-in-out"
@@ -81,11 +108,23 @@ function Navbar() {
                     </div>
 
                     {/* Account Button */}
-                    <div className="relative group inline-block p-2 rounded-md cursor-pointer">
-                        {/* Background liquid effect on hover */}
+                    <div
+                        className="relative group inline-block p-2 rounded-md cursor-pointer"
+                        onClick={() => {
+                            const token = localStorage.getItem('token');
+                            if (!token) {
+                                navigate('/login');
+                            } else {
+                                const confirmLogout = window.confirm('Are you sure you want to logout?');
+                                if (confirmLogout) {
+                                    localStorage.removeItem('token');
+                                    navigate('/');
+                                }
+                            }
+                        }}
+                    >
                         <div className="absolute inset-0 rounded-md bg-gray-300 backdrop-blur-md ring-1 ring-white/40 shadow-md shadow-black/10 opacity-0 scale-95 group-hover:opacity-100  group-hover:scale-100 transition-all duration-300 ease-in-out z-0" />
 
-                    
                         <svg
                             className="w-9 h-7 text-black relative z-10"
                             viewBox="1 -1 20 22"
