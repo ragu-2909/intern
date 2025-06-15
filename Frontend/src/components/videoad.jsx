@@ -8,7 +8,7 @@ function Viideoad() {
                 loop
                 muted
             >
-                <source src="src/assets/Homepage-We-Are-Tesla-Desktop.webm" type="video/mp4" />
+                <source src="https://res.cloudinary.com/dkcwopasm/video/upload/v1749984279/Homepage-We-Are-Tesla-Desktop_dkto47.webm" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
 
