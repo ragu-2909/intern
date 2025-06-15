@@ -20,7 +20,7 @@ function Loginpage() {
 
                 if (response.data.success) {
                     localStorage.setItem('token', response.data.token);
-                    nav('/home');  // Navigate first
+                    nav('/');  // Navigate first
                     window.location.reload();  // Then reload if needed
                 } else {
                     setErrors({ form: 'Invalid login credentials' });
