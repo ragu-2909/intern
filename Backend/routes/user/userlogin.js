@@ -8,8 +8,7 @@ const router = express.Router();
 dotenv.config();
 
 
-
-const secret = "Tesla";
+const secret = process.env.JWT_SECRET;
 
 console.log(secret)
 

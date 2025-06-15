@@ -1,5 +1,5 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
+
 import { UserOrderHistoryModel, UserCustomizeModel } from '../../models/userModel.js';
 import userAuth from '../../middlewares/userauth.js';
 
